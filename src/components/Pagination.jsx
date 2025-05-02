@@ -31,11 +31,11 @@ function Pagination() {
   return (
     <>
       <div className="grid grid-cols-4"></div>
-      <div>
-        <button onClick={previousPage} disabled={isDisabledPrev}>
+      <div className=" flex justify-center items-center gap-4">
+        <button className="bg-amber-400 pt-2 pb-2 pr-3 pl-3 rounded-md m-2 w-20" onClick={previousPage} disabled={isDisabledPrev}>
           Previous
         </button>
-        <button onClick={nextPage} disabled={isDisabledNext}>
+        <button className="bg-amber-400 pt-2 pb-2 pr-3 pl-3 rounded-md m-2 w-20" onClick={nextPage} disabled={isDisabledNext}>
           Next
         </button>
       </div>
