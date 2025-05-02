@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
+import PokemonCard from "./PokemonCard";
 
 function Pagination() {
   const [page, setPage] = useState(1);
@@ -13,7 +14,6 @@ function Pagination() {
         const res = await fetch("https://pokeapi.co/api/v2/pokemon");
         const arr = await res.json();
         console.log(arr);
-        
 
         const nestedfetches = arr.results.map((obj) =>
           fetch(obj.url).then((r) => r.json())
@@ -51,7 +51,15 @@ function Pagination() {
 
   return (
     <>
-      <div className="grid grid-cols-4"></div>
+      <div className="grid grid-cols-4 place-items-center ">
+        {pokemonArray.map((c) => (
+          <PokemonCard
+            name={c.name}
+            img={c.sprites.front_default}
+            types={c.types}
+          />
+        ))}
+      </div>
       <div className=" flex justify-center items-center gap-4">
         <button
           className="bg-amber-400 pt-2 pb-2 pr-3 pl-3 rounded-md m-2 w-20"
