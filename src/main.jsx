@@ -9,9 +9,8 @@ import PokemonDetails from './components/PokemonDetails.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path = '/' element = {<App/>}>
-        <Route path='pokemon/:name' element={<PokemonDetails />} />
-      </Route>
+      <Route path = '' element = {<App/>}/>
+      <Route path="pokemon/:name" element={<PokemonDetails />} />
     </>
   )
 )
