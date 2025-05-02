@@ -10,13 +10,17 @@ function Pagination(props) {
   const [searchedPokemon, setSearchedPokemon] = useState("");
 
   useEffect(() => {
-    setSearchedPokemon(props.searchValue)
+    setSearchedPokemon(props.searchValue);
   }, [props.searchValue]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://pokeapi.co/api/v2/pokemon");
+        const limit = 20;
+        const offset = (page - 1) * limit;
+        const res = await fetch(
+          `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+        );
         const arr = await res.json();
         console.log(arr);
 
@@ -30,33 +34,28 @@ function Pagination(props) {
       }
     };
     fetchData();
-  }, []);
-
-  function disablePrevButton() {
-    if (page - 1 < 1) {
-      setIsDisabledPrev(true);
-    }
-  }
-
-  function disableNextButton() {
-    if (page + 1 > 5) {
-      setIsDisabledNext(true);
-    }
-  }
+  }, [page]);
 
   function nextPage() {
-    setPage(page++);
-    disableNextButton();
+    console.log("next clicked")
+    setPage(prev=>prev+1)
+    page==5?setIsDisabledNext(true):setIsDisabledNext(false)
   }
-  function previousPage() {
-    setPage(page--);
-    disablePrevButton();
-  }
-  console.log(pokemonArray);
 
-  const filterArray = pokemonArray.filter((obj)=>
+  function previousPage() {
+    console.log("prev clicked")
+    page==1?(setIsDisabledNext(true)):setIsDisabledNext(false)
+    if(page==1){
+      setIsDisabledNext(true)
+    }
+    else{
+      setIsDisabledNext(false)
+      setPage(prev=>prev-1)
+    }
+  }
+  const filterArray = pokemonArray.filter((obj) =>
     obj.name.toLowerCase().includes(searchedPokemon.toLowerCase())
-  )
+  );
 
   return (
     <>
