@@ -2,11 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import PokemonCard from "./PokemonCard";
 
-function Pagination() {
+function Pagination(props) {
   const [page, setPage] = useState(1);
   const [isDisabledPrev, setIsDisabledPrev] = useState(false);
   const [isDisabledNext, setIsDisabledNext] = useState(false);
   const [pokemonArray, setPokemonArray] = useState([]);
+  const [searchedPokemon, setSearchedPokemon] = useState("");
+
+  useEffect(() => {
+    setSearchedPokemon(props.searchValue)
+  }, [props.searchValue]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,10 +54,14 @@ function Pagination() {
   }
   console.log(pokemonArray);
 
+  const filterArray = pokemonArray.filter((obj)=>
+    obj.name.toLowerCase().includes(searchedPokemon.toLowerCase())
+  )
+
   return (
     <>
       <div className="grid grid-cols-4 place-items-center ">
-        {pokemonArray.map((c) => (
+        {filterArray.map((c) => (
           <PokemonCard
             name={c.name}
             img={c.sprites.front_default}

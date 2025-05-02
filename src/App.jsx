@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
 import Pagination from "./components/Pagination";
@@ -14,7 +14,7 @@ function App() {
     <>
         <h1 className="flex justify-center items-center">Pokedex</h1>
         <SearchBar pokemon={pokemonEntered} />
-        <Pagination />
+        <Pagination searchValue = {pokemon} />
     </>
   );
 }
