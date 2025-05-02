@@ -12,9 +12,9 @@ function App() {
 
   return (
     <>
-      <h1 className="flex justify-center items-center">Pokedex</h1>
-      <SearchBar pokemon={pokemonEntered} />
-      <Pagination />
+        <h1 className="flex justify-center items-center">Pokedex</h1>
+        <SearchBar pokemon={pokemonEntered} />
+        <Pagination />
     </>
   );
 }
