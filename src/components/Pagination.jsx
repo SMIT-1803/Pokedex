@@ -8,7 +8,6 @@ function Pagination(props) {
   const [pokemonArray, setPokemonArray] = useState([]);
   const [searchedPokemon, setSearchedPokemon] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     setSearchedPokemon(props.searchValue);
@@ -30,7 +29,8 @@ function Pagination(props) {
         setPokemonArray(results);
         
       } catch (err) { 
-        console.log("Hello")
+        console.log("something happened", err)
+        setLoading(false)
       }
     };
     fetchData();
