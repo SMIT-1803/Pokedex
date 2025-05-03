@@ -4,8 +4,6 @@ import PokemonCard from "./PokemonCard";
 
 function Pagination(props) {
   const [page, setPage] = useState(1);
-  const [isDisabledPrev, setIsDisabledPrev] = useState(false);
-  const [isDisabledNext, setIsDisabledNext] = useState(false);
   const [pokemonArray, setPokemonArray] = useState([]);
   const [searchedPokemon, setSearchedPokemon] = useState("");
 
@@ -21,7 +19,7 @@ function Pagination(props) {
         const res = await fetch(
           `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
         );
-        const arr = await res.json(); 
+        const arr = await res.json();
 
         const nestedfetches = arr.results.map((obj) =>
           fetch(obj.url).then((r) => r.json())
@@ -35,52 +33,41 @@ function Pagination(props) {
     fetchData();
   }, [page]);
 
-  function nextPage() {
-    setPage(prev=>prev+1)
-    page==5?setIsDisabledNext(true):setIsDisabledNext(false)
-  }
-
-  function previousPage() {
-    page==1?(setIsDisabledNext(true)):setIsDisabledNext(false)
-    if(page==1){
-      setIsDisabledNext(true)
-    }
-    else{
-      setIsDisabledNext(false)
-      setPage(prev=>prev-1)
-    }
-  }
   const filterArray = pokemonArray.filter((obj) =>
     obj.name.toLowerCase().includes(searchedPokemon.toLowerCase())
   );
 
-  console.log(filterArray)
-
+  console.log(filterArray);
 
   return (
     <>
-      <div className="grid grid-cols-4 place-items-center ">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 ">
         {filterArray.map((c) => (
           <PokemonCard
-            key = {c.id}
+            key={c.id}
             name={c.name}
             img={c.sprites.front_default}
             types={c.types}
           />
         ))}
       </div>
-      <div className=" flex justify-center items-center gap-4">
+      <div className=" flex justify-center items-center gap-4 p-5">
         <button
-          className="bg-amber-400 pt-2 pb-2 pr-3 pl-3 rounded-md m-2 w-20"
-          onClick={previousPage}
-          disabled={isDisabledPrev}
+          onClick={() => setPage((n) => Math.max(1, n - 1))}
+          disabled={page === 1}
+          className="px-4 py-2 rounded-lg font-semibold 
+                     bg-indigo-500 hover:bg-indigo-600 
+                     disabled:bg-gray-300 disabled:cursor-not-allowed
+                     text-white"
         >
           Previous
         </button>
+        <span className="text-gray-700 font-medium">Page {page}</span>
         <button
-          className="bg-amber-400 pt-2 pb-2 pr-3 pl-3 rounded-md m-2 w-20"
-          onClick={nextPage}
-          disabled={isDisabledNext}
+          onClick={() => setPage((n) => n + 1)}
+          className="px-4 py-2 rounded-lg font-semibold 
+                     bg-indigo-500 hover:bg-indigo-600 
+                     text-white"
         >
           Next
         </button>

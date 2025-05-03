@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-function SearchBar(props) {
+function SearchBar({ pokemon }) {
+  const [search, setSearch] = useState("");
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    pokemon(value);
+  };
+
   return (
-    <>
-      <div className="flex justify-center items-center ">
-        <input
-          className="border-2 border-black"
-          onChange={(e)=>{return props.pokemon(e.target.value)}}
-          type="text"
-          name="pokemon"
-          id=""
-          placeholder="Search Pokemon"
-        />
-      </div>
-    </>
+    <div className="flex justify-center">
+      <input
+        type="text"
+        value={search}
+        onChange={handleChange}
+        placeholder="Search Pokémon..."
+        className="w-full max-w-md px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow shadow-sm"
+      />
+    </div>
   );
 }
 
