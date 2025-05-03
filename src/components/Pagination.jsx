@@ -55,12 +55,9 @@ function Pagination(props) {
     );
   }
 
-  // if (loading) return <p className="text-center text-gray-500 mt-8">Loading Pokémons...</p>;
   if (loading) {
     return animateFunc();
   }
-  // if (error) return <p className="text-center text-red-500 mt-8">Error: {error}</p>;
-  console.log(filterArray);
 
   return (
     <>
