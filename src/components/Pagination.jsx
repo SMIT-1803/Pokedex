@@ -62,6 +62,7 @@ function Pagination(props) {
       <div className="grid grid-cols-4 place-items-center ">
         {filterArray.map((c) => (
           <PokemonCard
+            key = {c.id}
             name={c.name}
             img={c.sprites.front_default}
             types={c.types}
