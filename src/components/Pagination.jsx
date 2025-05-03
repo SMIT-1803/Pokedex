@@ -16,21 +16,17 @@ function Pagination(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon?limit=2000`
-        );
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=2000`);
         const arr = await res.json();
 
         const nestedfetches = arr.results.map((obj) =>
           fetch(obj.url).then((r) => r.json())
         );
         const results = await Promise.all(nestedfetches);
-        setLoading(false)
+        setLoading(false);
         setPokemonArray(results);
-        
-      } catch (err) { 
-        console.log("something happened", err)
-        setLoading(false)
+      } catch (err) {
+        console.log("something happened");
       }
     };
     fetchData();
@@ -44,9 +40,26 @@ function Pagination(props) {
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
   const paginated = filterArray.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
+  function animateFunc() {
+    return (
+      <>
+        <div className="flex flex-col justify-center items-center m-[12%]">
+          <img
+            className=" w-14 animate-bounce"
+            src="src/assets/pokeball.png"
+            alt="Pokeball"
+          />
+          <p className="text-center text-gray-500 mt-8">Loading Pokémons...</p>
+        </div>
+      </>
+    );
+  }
 
-  if (loading) return <p className="text-center text-gray-500 mt-8">Loading Pokémons...</p>;
-  if (error) return <p className="text-center text-red-500 mt-8">Error: {error}</p>;
+  // if (loading) return <p className="text-center text-gray-500 mt-8">Loading Pokémons...</p>;
+  if (loading) {
+    return animateFunc();
+  }
+  // if (error) return <p className="text-center text-red-500 mt-8">Error: {error}</p>;
   console.log(filterArray);
 
   return (
@@ -72,7 +85,9 @@ function Pagination(props) {
         >
           Previous
         </button>
-        <span className="text-gray-700 font-medium">Page {page} of {totalPages}</span>
+        <span className="text-gray-700 font-medium">
+          Page {page} of {totalPages}
+        </span>
         <button
           onClick={() => setPage((n) => n + 1)}
           className="px-4 py-2 rounded-lg font-semibold 
@@ -87,4 +102,3 @@ function Pagination(props) {
 }
 
 export default Pagination;
-

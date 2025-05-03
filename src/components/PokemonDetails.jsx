@@ -24,7 +24,24 @@ function PokemonDetails() {
       });
   }, [name]);
 
-  if (loading) return <p className="text-center text-gray-500 mt-8">Loading Pokémon...</p>;
+  function animateFunc() {
+    return (
+      <>
+        <div className="flex flex-col justify-center items-center m-[12%]">
+          <img
+            className=" w-14 animate-bounce"
+            src="src/assets/pokeball.png"
+            alt="Pokeball"
+          />
+          <p className="text-center text-gray-500 mt-8">Loading Pokémons...</p>
+        </div>
+      </>
+    );
+  }
+
+  if (loading) {
+    return animateFunc();
+  }
   if (error) return <p className="text-center text-red-500 mt-8">Error: {error}</p>;
 
   return (
