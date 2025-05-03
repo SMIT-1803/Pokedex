@@ -3,9 +3,12 @@ import { useState } from "react";
 import PokemonCard from "./PokemonCard";
 
 function Pagination(props) {
+  const ITEMS_PER_PAGE = 20;
   const [page, setPage] = useState(1);
   const [pokemonArray, setPokemonArray] = useState([]);
   const [searchedPokemon, setSearchedPokemon] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setSearchedPokemon(props.searchValue);
@@ -14,10 +17,8 @@ function Pagination(props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const limit = 20;
-        const offset = (page - 1) * limit;
         const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
+          `https://pokeapi.co/api/v2/pokemon?limit=2000`
         );
         const arr = await res.json();
 
@@ -25,24 +26,33 @@ function Pagination(props) {
           fetch(obj.url).then((r) => r.json())
         );
         const results = await Promise.all(nestedfetches);
+        setLoading(false)
         setPokemonArray(results);
-      } catch (err) {
-        console.error("Fetch error:", err);
+        
+      } catch (err) { 
+        console.log("Hello")
       }
     };
     fetchData();
-  }, [page]);
+  }, []);
 
   const filterArray = pokemonArray.filter((obj) =>
-    obj.name.toLowerCase().includes(searchedPokemon.toLowerCase())
+    obj.name.toLowerCase().startsWith(searchedPokemon.toLowerCase())
   );
 
+  const totalPages = Math.ceil(filterArray.length / ITEMS_PER_PAGE);
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+  const paginated = filterArray.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+
+  if (loading) return <p className="text-center text-gray-500 mt-8">Loading Pokémons...</p>;
+  if (error) return <p className="text-center text-red-500 mt-8">Error: {error}</p>;
   console.log(filterArray);
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 ">
-        {filterArray.map((c) => (
+        {paginated.map((c) => (
           <PokemonCard
             key={c.id}
             name={c.name}
@@ -62,7 +72,7 @@ function Pagination(props) {
         >
           Previous
         </button>
-        <span className="text-gray-700 font-medium">Page {page}</span>
+        <span className="text-gray-700 font-medium">Page {page} of {totalPages}</span>
         <button
           onClick={() => setPage((n) => n + 1)}
           className="px-4 py-2 rounded-lg font-semibold 
@@ -77,3 +87,4 @@ function Pagination(props) {
 }
 
 export default Pagination;
+
