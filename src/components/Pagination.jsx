@@ -30,7 +30,7 @@ function Pagination(props) {
         setLoading(false);
         setPokemonArray(results);
       } catch (err) {
-        console.log("something happened");
+        console.log(err);
       }
     };
     fetchData();
