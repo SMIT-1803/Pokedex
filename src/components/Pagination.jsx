@@ -60,9 +60,10 @@ function Pagination(props) {
         )
       : filterArray;
 
-  const totalPages = Math.ceil(filterArray.length / ITEMS_PER_PAGE);
+  
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
   const paginated = DisplayArr.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(paginated.length / ITEMS_PER_PAGE);
 
   function animateFunc() {
     return (
