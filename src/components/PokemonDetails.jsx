@@ -22,8 +22,14 @@ function PokemonDetails() {
       })
       .then((res) => res.json())
       .then((data) => {
+        let description = "";
+        data.flavor_text_entries.map((c)=>{
+          if(c.language.name==="en"){
+            description = c.flavor_text.replaceAll("", " ")
+          }
+        })
         setDescription(
-          data.flavor_text_entries[0].flavor_text.replaceAll("", " ")
+          description
         );
       })
       .catch((err) => {
