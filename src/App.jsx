@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-indigo-100">
-      <header className="bg-indigo-600 text-white py-6 shadow-md">
+      <header className="bg-indigo-600 text-white py-6 shadow-md relative z-2">
         <h1 className="text-center text-4xl font-extrabold">Pokédex</h1>
       </header>
       <main className="container mx-auto px-4 py-8">

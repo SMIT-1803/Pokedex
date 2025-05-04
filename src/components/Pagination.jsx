@@ -87,7 +87,7 @@ function Pagination(props) {
       {paginated.length == 0 ? (
         <p className="flex justify-center items-center">"No Pokémon found"</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 ">
+        <div className=" relative grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 ">
           {paginated.map((c) => (
             <PokemonCard
               key={c.id}
