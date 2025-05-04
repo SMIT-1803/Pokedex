@@ -1,0 +1,23 @@
+{
+    "types": [
+      { "id": 1,  "name": "normal",   "bgClass": "bg-gray-400" },
+      { "id": 2,  "name": "fighting", "bgClass": "bg-red-700" },
+      { "id": 3,  "name": "flying",   "bgClass": "bg-indigo-300" },
+      { "id": 4,  "name": "poison",   "bgClass": "bg-purple-500" },
+      { "id": 5,  "name": "ground",   "bgClass": "bg-yellow-300" },
+      { "id": 6,  "name": "rock",     "bgClass": "bg-yellow-700" },
+      { "id": 7,  "name": "bug",      "bgClass": "bg-green-600" },
+      { "id": 8,  "name": "ghost",    "bgClass": "bg-purple-600" },
+      { "id": 9,  "name": "steel",    "bgClass": "bg-gray-300" },
+      { "id": 10, "name": "fire",     "bgClass": "bg-orange-500" },
+      { "id": 11, "name": "water",    "bgClass": "bg-blue-500" },
+      { "id": 12, "name": "grass",    "bgClass": "bg-green-500" },
+      { "id": 13, "name": "electric", "bgClass": "bg-yellow-400" },
+      { "id": 14, "name": "psychic",  "bgClass": "bg-pink-500" },
+      { "id": 15, "name": "ice",      "bgClass": "bg-teal-200" },
+      { "id": 16, "name": "dragon",   "bgClass": "bg-indigo-600" },
+      { "id": 17, "name": "dark",     "bgClass": "bg-gray-700" },
+      { "id": 18, "name": "fairy",    "bgClass": "bg-pink-200" }
+    ]
+  }
+  
