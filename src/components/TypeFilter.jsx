@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PokemonTypes from "../PokemonTypes/Types.json";
+import arrow from "../assets/Arrow.png"
 
 function SortFilter(props) {
   const [pokemonTypesInfo] = useState(PokemonTypes.types);
@@ -39,7 +40,7 @@ function SortFilter(props) {
           {typeMenuStatus === "hidden" ? "Show" : "Hide"} Advanced Search
         </span>
         <img
-          src="src/assets/Arrow.png"
+          src={arrow}
           alt="Toggle"
           className={`w-6 h-6 transform transition-transform duration-200
                 ${typeMenuStatus === "hidden" ? "rotate-0" : "rotate-180"}`}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PokemonCard from "./PokemonCard";
+import Pokeball from "../assets/pokeball.png"
 
 function Pagination(props) {
   const ITEMS_PER_PAGE = 20;
@@ -69,7 +70,7 @@ function Pagination(props) {
         <div className="flex flex-col justify-center items-center m-[12%]">
           <img
             className=" w-14 animate-bounce"
-            src="src/assets/pokeball.png"
+            src={Pokeball}
             alt="Pokeball"
           />
           <p className="text-center text-gray-500 mt-6">Loading Pokémons...</p>
