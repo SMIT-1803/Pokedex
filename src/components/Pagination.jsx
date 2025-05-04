@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PokemonCard from "./PokemonCard";
 
 function Pagination(props) {
@@ -8,10 +7,15 @@ function Pagination(props) {
   const [pokemonArray, setPokemonArray] = useState([]);
   const [searchedPokemon, setSearchedPokemon] = useState("");
   const [loading, setLoading] = useState(true);
+  const [pokemonTypesSelected, setPokemonTypesSelected] = useState([]);
 
   useEffect(() => {
     setSearchedPokemon(props.searchValue);
   }, [props.searchValue]);
+
+  useEffect(() => {
+    setPokemonTypesSelected(props.selectedPokemonTypes);
+  }, [props.selectedPokemonTypes]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,9 +40,28 @@ function Pagination(props) {
     obj.name.toLowerCase().startsWith(searchedPokemon.toLowerCase())
   );
 
+  const typesArr = (obj) => {
+    const typesArray = [];
+    obj.map((a) => {
+      typesArray.push(a.type.name.toUpperCase());
+    });
+    return typesArray;
+  };
+
+  const subSet = (objType, selectedTypes) => {
+    return selectedTypes.every((element) => objType.includes(element));
+  };
+
+  const DisplayArr =
+    pokemonTypesSelected.length > 0
+      ? filterArray.filter((p) =>
+          subSet(typesArr(p.types), pokemonTypesSelected)
+        )
+      : filterArray;
+
   const totalPages = Math.ceil(filterArray.length / ITEMS_PER_PAGE);
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
-  const paginated = filterArray.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const paginated = DisplayArr.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   function animateFunc() {
     return (
@@ -49,7 +72,7 @@ function Pagination(props) {
             src="src/assets/pokeball.png"
             alt="Pokeball"
           />
-          <p className="text-center text-gray-500 mt-8">Loading Pokémons...</p>
+          <p className="text-center text-gray-500 mt-6">Loading Pokémons...</p>
         </div>
       </>
     );
@@ -61,16 +84,21 @@ function Pagination(props) {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 ">
-        {paginated.map((c) => (
-          <PokemonCard
-            key={c.id}
-            name={c.name}
-            img={c.sprites.front_default}
-            types={c.types}
-          />
-        ))}
-      </div>
+      {paginated.length == 0 ? (
+        <p className="flex justify-center items-center">"No Pokémon found"</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7 ">
+          {paginated.map((c) => (
+            <PokemonCard
+              key={c.id}
+              name={c.name}
+              img={c.sprites.front_default}
+              types={c.types}
+            />
+          ))}
+        </div>
+      )}
+
       <div className=" flex justify-center items-center gap-4 p-5">
         <button
           onClick={() => setPage((n) => Math.max(1, n - 1))}
