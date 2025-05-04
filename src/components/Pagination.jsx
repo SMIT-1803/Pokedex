@@ -12,6 +12,7 @@ function Pagination(props) {
 
   useEffect(() => {
     setSearchedPokemon(props.searchValue);
+    setPage(1)
   }, [props.searchValue]);
 
   useEffect(() => {
