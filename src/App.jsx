@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import SearchBar from "./components/SearchBar";
 import Pagination from "./components/Pagination";
 import TypeFilter from "./components/TypeFilter";
