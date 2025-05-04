@@ -39,7 +39,7 @@ function Pagination(props) {
     fetchData();
   }, []);
 
-  const filterArray = pokemonArray.filter((obj) =>
+  let filterArray = pokemonArray.filter((obj) =>
     obj.name.toLowerCase().startsWith(searchedPokemon.toLowerCase())
   );
 
@@ -54,9 +54,9 @@ function Pagination(props) {
   const subSet = (objType, selectedTypes) => {
     return selectedTypes.every((element) => objType.includes(element));
   };
-
-  const DisplayArr =
-    pokemonTypesSelected.length > 0
+  
+  filterArray = 
+     pokemonTypesSelected.length > 0
       ? filterArray.filter((p) =>
           subSet(typesArr(p.types), pokemonTypesSelected)
         )
@@ -64,8 +64,8 @@ function Pagination(props) {
 
   
   const startIndex = (page - 1) * ITEMS_PER_PAGE;
-  const paginated = DisplayArr.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-  const totalPages = Math.ceil(paginated.length / ITEMS_PER_PAGE);
+  const paginated = filterArray.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filterArray.length / ITEMS_PER_PAGE);
 
   function animateFunc() {
     return (
@@ -122,7 +122,7 @@ function Pagination(props) {
           onClick={() => setPage((n) => n + 1)}
           className="px-4 py-2 rounded-lg font-semibold 
                      bg-indigo-500 hover:bg-indigo-600 
-                     text-white"
+                     text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
         >
           Next
         </button>
