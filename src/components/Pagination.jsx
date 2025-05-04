@@ -17,6 +17,7 @@ function Pagination(props) {
 
   useEffect(() => {
     setPokemonTypesSelected(props.selectedPokemonTypes);
+    setPage(1)
   }, [props.selectedPokemonTypes]);
 
   useEffect(() => {
@@ -117,6 +118,7 @@ function Pagination(props) {
           Page {page} of {totalPages}
         </span>
         <button
+        disabled = {page===totalPages}
           onClick={() => setPage((n) => n + 1)}
           className="px-4 py-2 rounded-lg font-semibold 
                      bg-indigo-500 hover:bg-indigo-600 
