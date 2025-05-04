@@ -16,7 +16,7 @@
       { "id": 14, "name": "psychic",  "bgClass": "bg-pink-500" },
       { "id": 15, "name": "ice",      "bgClass": "bg-teal-200" },
       { "id": 16, "name": "dragon",   "bgClass": "bg-indigo-600" },
-      { "id": 17, "name": "dark",     "bgClass": "bg-gray-700" },
+      { "id": 17, "name": "dark",     "bgClass": "bg-black" },
       { "id": 18, "name": "fairy",    "bgClass": "bg-pink-200" }
     ]
   }

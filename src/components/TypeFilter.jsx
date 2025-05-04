@@ -29,7 +29,7 @@ function SortFilter(props) {
             className="flex items-center justify-between p-2 bg-white dark:bg-gray-700 rounded-lg shadow-sm hover:shadow-md transition-colors duration-200 cursor-pointer"
           >
             <span
-              className={`px-2 py-1 rounded-full text-white uppercase text-xs font-medium ${type.bgClass}`}
+              className={`px-2 py-1 rounded-xl text-white uppercase text-xs font-medium ${type.bgClass}`}
             >
               {type.name}
             </span>
