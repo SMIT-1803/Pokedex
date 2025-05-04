@@ -21,11 +21,11 @@ function PokemonDetails() {
         return fetch(data.species.url);
       })
       .then((res) => res.json())
-      .then((data) =>
+      .then((data) => {
         setDescription(
-          data.flavor_text_entries[0].flavor_text.replaceAll('', ' ')
-        )
-      )
+          data.flavor_text_entries[0].flavor_text.replaceAll("", " ")
+        );
+      })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
@@ -56,7 +56,6 @@ function PokemonDetails() {
   return (
     <div className="min-h-screen bg-gradient-to-tr from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center p-6">
       <div className="max-w-3xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden transform transition-transform duration-300 hover:scale-105">
-        {/* Header */}
         <div className="p-6 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-center">
           <h1 className="text-4xl md:text-5xl font-bold tracking-wide">
             {pokemon.name.toUpperCase()}
@@ -73,34 +72,32 @@ function PokemonDetails() {
               className="w-56 h-56 object-contain drop-shadow-lg"
             />
             <div className="w-full">
-              <p className="text-gray-600 uppercase mb-2 font-semibold">
-                Type
-              </p>
+              <p className="text-gray-600 uppercase mb-2 font-semibold">Type</p>
               <div className="flex flex-wrap gap-3">
                 {pokemon.types.map((t) => (
                   <span
                     key={t.slot}
                     className={`px-4 py-1 rounded-full text-white uppercase text-xs font-semibold shadow-sm transition-transform transform hover:scale-105 ${
                       {
-                        normal: 'bg-gray-400',
-                        fire: 'bg-red-500',
-                        water: 'bg-blue-500',
-                        electric: 'bg-yellow-400',
-                        grass: 'bg-green-500',
-                        ice: 'bg-blue-200',
-                        fighting: 'bg-red-700',
-                        poison: 'bg-purple-500',
-                        ground: 'bg-yellow-600',
-                        flying: 'bg-sky-300',
-                        psychic: 'bg-pink-500',
-                        bug: 'bg-green-700',
-                        rock: 'bg-yellow-700',
-                        ghost: 'bg-indigo-700',
-                        dark: 'bg-gray-800',
-                        dragon: 'bg-indigo-800',
-                        steel: 'bg-gray-500',
-                        fairy: 'bg-pink-300',
-                      }[t.type.name] || 'bg-gray-500'
+                        normal: "bg-gray-400",
+                        fire: "bg-red-500",
+                        water: "bg-blue-500",
+                        electric: "bg-yellow-400",
+                        grass: "bg-green-500",
+                        ice: "bg-blue-200",
+                        fighting: "bg-red-700",
+                        poison: "bg-purple-500",
+                        ground: "bg-yellow-600",
+                        flying: "bg-sky-300",
+                        psychic: "bg-pink-500",
+                        bug: "bg-green-700",
+                        rock: "bg-yellow-700",
+                        ghost: "bg-indigo-700",
+                        dark: "bg-gray-800",
+                        dragon: "bg-indigo-800",
+                        steel: "bg-gray-500",
+                        fairy: "bg-pink-300",
+                      }[t.type.name] || "bg-gray-500"
                     }`}
                   >
                     {t.type.name}
